@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Audit & UX Analyzer — By Janno.</title>
+
+    <!-- Google Fonts: Special Elite, Plus Jakarta Sans, Space Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Special+Elite&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0E161B',
+                        darkcard: '#16222A',
+                        cream: '#FFFDD0',
+                        accent: {
+                            DEFAULT: '#AA4628',
+                            hover: '#923A1F'
+                        },
+                        sigGreen: '#10BB82'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                        brand: ['Special Elite', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS Effects -->
+    <style>
+        /* 3D Depth Button Hover Effect */
+        .btn-depth {
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-depth:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(170, 70, 40, 0.25), 0 6px 16px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-depth:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Ambient Radial Glow */
+        .bg-radial-glow {
+            background: radial-gradient(circle at center, rgba(255, 253, 208, 0.05) 0%, rgba(14, 22, 27, 0) 70%);
+        }
+
+        /* Keyframe animation for scanner spinner */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-custom {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-darkbg text-cream min-h-screen flex flex-col justify-between font-sans antialiased selection:bg-accent selection:text-cream">
+
+    <!-- Main Top Navigation -->
+    <header class="w-full max-w-5xl mx-auto px-6 py-6 flex items-center justify-between border-b border-cream/10">
+        <a href="index.html" class="font-brand text-2xl text-cream tracking-wide">
+            By Janno<span class="text-accent">.</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-wider text-cream/70">
+            <a href="index.html" class="hover:text-cream transition-colors">Home</a>
+            <a href="web-development.html" class="hover:text-cream transition-colors">Web Dev</a>
+            <a href="branding.html" class="hover:text-cream transition-colors">Branding</a>
+            <a href="audit.html" class="text-cream font-bold underline decoration-accent underline-offset-4">Audit
+                Tool</a>
+            <a href="portfolio.html" class="hover:text-cream transition-colors">Portfolio</a>
+            <a href="about.html" class="hover:text-cream transition-colors">About</a>
+        </nav>
+
+        <a href="mailto:hello@byjanno.com"
+            class="btn-depth bg-accent hover:bg-accent-hover text-cream text-xs font-mono tracking-wider uppercase px-4 py-2.5 rounded-md font-bold">
+            Get In Touch
+        </a>
+    </header>
+
+    <!-- Audit Section Main Container -->
+    <main class="w-full max-w-4xl mx-auto px-6 py-12 flex-grow flex items-center justify-center bg-radial-glow">
+        <div class="w-full">
+
+            <!-- 1. Initial URL Input Form -->
+            <div id="audit-form-card" class="bg-darkcard border border-cream/10 rounded-2xl p-8 md:p-10 shadow-2xl">
+                <div
+                    class="inline-block px-3 py-1 bg-accent/10 border border-accent/20 rounded-full text-accent text-[11px] font-mono tracking-widest uppercase mb-4">
+                    Free AI Audit Engine
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold text-cream mb-3 tracking-tight">
+                    Website UX & Performance Audit
+                </h1>
+                <p class="text-cream/60 text-sm leading-relaxed mb-8 max-w-xl">
+                    Enter your website domain to generate an instant visual analysis, Lighthouse speed scores, and
+                    conversion optimization directives.
+                </p>
+
+                <form id="audit-url-form" class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="audit-url-input" placeholder="yourwebsite.co.za" required
+                        class="flex-1 bg-darkbg border border-cream/20 rounded-lg px-4 py-3.5 text-cream placeholder-cream/30 text-sm font-mono focus:outline-none focus:border-accent transition-colors" />
+                    <button type="submit" id="audit-submit-btn"
+                        class="btn-depth bg-accent hover:bg-accent-hover text-cream font-mono text-xs uppercase tracking-wider font-bold px-7 py-3.5 rounded-lg whitespace-nowrap">
+                        Run Instant Audit
+                    </button>
+                </form>
+            </div>
+
+            <!-- 2. Animated Loading State -->
+            <div id="audit-loading-card"
+                class="bg-darkcard border border-cream/10 rounded-2xl p-10 shadow-2xl text-center hidden">
+                <div
+                    class="w-12 h-12 border-4 border-cream/10 border-t-accent rounded-full animate-spin-custom mx-auto mb-6">
+                </div>
+                <h3 id="loading-status-text" class="text-lg font-bold text-cream font-sans mb-2">Capturing live viewport
+                    screenshot...</h3>
+                <p class="text-xs font-mono text-cream/40 mb-6">Analyzing UI hierarchy and fetching Google PageSpeed
+                    metrics</p>
+                <div class="w-full bg-darkbg h-2 rounded-full overflow-hidden border border-cream/5">
+                    <div id="audit-progress-bar" class="bg-accent h-full w-0 transition-all duration-500 ease-out">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Results & Teaser Dashboard -->
+            <div id="audit-results-card"
+                class="bg-darkcard border border-cream/10 rounded-2xl p-6 md:p-8 shadow-2xl space-y-6 hidden">
+
+                <!-- Header Summary -->
+                <div class="flex flex-col md:flex-row gap-6 items-stretch">
+                    <div
+                        class="bg-darkbg border border-cream/10 rounded-xl p-6 text-center min-w-[180px] flex flex-col justify-center">
+                        <div id="overall-score-num" class="text-5xl font-black text-cream font-mono">0</div>
+                        <div class="text-[10px] font-mono uppercase tracking-widest text-cream/40 mt-1">Overall UX Score
+                        </div>
+                    </div>
+                    <div class="bg-darkbg border border-cream/10 rounded-xl p-6 flex-1">
+                        <h3 class="text-xs font-mono uppercase tracking-widest text-accent font-bold mb-2">Executive
+                            Overview</h3>
+                        <p id="audit-summary-text" class="text-cream/80 text-sm leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <!-- Category Breakdown Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs">
+                    <div class="bg-darkbg border border-cream/5 rounded-lg p-4 flex justify-between items-center">
+                        <span class="text-cream/60">Visual Design</span>
+                        <span id="score-visual" class="text-cream font-bold">0/100</span>
+                    </div>
+                    <div class="bg-darkbg border border-cream/5 rounded-lg p-4 flex justify-between items-center">
+                        <span class="text-cream/60">Mobile UX</span>
+                        <span id="score-mobile" class="text-cream font-bold">0/100</span>
+                    </div>
+                    <div class="bg-darkbg border border-cream/5 rounded-lg p-4 flex justify-between items-center">
+                        <span class="text-cream/60">Conversion Architecture</span>
+                        <span id="score-conversion" class="text-cream font-bold">0/100</span>
+                    </div>
+                    <div class="bg-darkbg border border-cream/5 rounded-lg p-4 flex justify-between items-center">
+                        <span class="text-cream/60">Brand Trust</span>
+                        <span id="score-trust" class="text-cream font-bold">0/100</span>
+                    </div>
+                </div>
+
+                <!-- PageSpeed Metrics Bar -->
+                <div
+                    class="bg-darkbg border border-cream/10 rounded-xl p-4 flex flex-wrap justify-between items-center gap-4 text-xs font-mono text-cream/50">
+                    <div>Performance: <strong id="ps-perf" class="text-cream font-bold">--</strong></div>
+                    <div>SEO Score: <strong id="ps-seo" class="text-cream font-bold">--</strong></div>
+                    <div>FCP: <strong id="ps-fcp" class="text-cream font-bold">--</strong></div>
+                    <div>LCP: <strong id="ps-lcp" class="text-cream font-bold">--</strong></div>
+                </div>
+
+                <!-- Screenshot Preview -->
+                <div class="rounded-xl overflow-hidden border border-cream/10 max-h-64 bg-darkbg">
+                    <img id="audit-screenshot-img" src="" alt="Captured Viewport"
+                        class="w-full h-full object-cover object-top" />
+                </div>
+
+                <!-- Gated Lead Capture / Priority Fixes Unlock -->
+                <div id="gated-lock-box"
+                    class="bg-accent/10 border border-accent/30 rounded-xl p-6 md:p-8 text-center space-y-4">
+                    <h3 class="text-lg font-bold text-cream">Unlock Priority Directives &amp; PDF Report</h3>
+                    <p class="text-cream/70 text-xs max-w-md mx-auto leading-relaxed">
+                        Enter your email to instantly reveal detailed design optimization fixes and receive the full PDF
+                        audit report directly in your inbox.
+                    </p>
+
+                    <form id="audit-unlock-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                        <input type="email" id="audit-email-input" placeholder="you@domain.co.za" required
+                            class="flex-1 bg-darkbg border border-cream/20 rounded-lg px-4 py-3 text-cream placeholder-cream/30 text-xs font-mono focus:outline-none focus:border-accent" />
+                        <button type="submit"
+                            class="btn-depth bg-accent hover:bg-accent-hover text-cream font-mono text-xs uppercase tracking-wider font-bold px-6 py-3 rounded-lg whitespace-nowrap">
+                            Unlock &amp; Send PDF
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Unlocked Priority Fixes List -->
+                <div id="unlocked-fixes-box" class="bg-darkbg border border-cream/10 rounded-xl p-6 space-y-4 hidden">
+                    <h3 class="text-xs font-mono uppercase tracking-widest text-accent font-bold">Priority Action
+                        Directives</h3>
+                    <div id="fixes-list" class="space-y-3 divide-y divide-cream/10"></div>
+                    <div id="email-confirmation-msg"
+                        class="bg-sigGreen/10 border border-sigGreen/30 text-sigGreen text-xs font-mono p-3 rounded-lg text-center hidden">
+                        Full audit report PDF dispatched to your inbox.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="w-full max-w-5xl mx-auto px-6 pt-12 pb-8 bg-transparent text-cream/70 text-xs font-sans">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+            <!-- Brand Summary -->
+            <div class="flex flex-col gap-3">
+                <span class="font-brand text-xl text-cream">By Janno<span class="text-accent">.</span></span>
+                <p class="text-cream/60 leading-relaxed max-w-xs text-[12px]">
+                    High-performance custom website design, web engineering, and digital brand development built for
+                    modern
+                    businesses.
+                </p>
+                <div class="font-mono text-[11px] text-cream/40 uppercase tracking-wider mt-1">
+                    GEORGE, WESTERN CAPE, ZA
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div>
+                <h4 class="text-[11px] font-mono uppercase tracking-widest text-cream/40 mb-3 font-bold">NAVIGATION</h4>
+                <ul class="space-y-2 text-cream/70 font-sans">
+                    <li><a href="index.html" class="hover:text-cream transition-colors">Home</a></li>
+                    <li><a href="web-development.html" class="hover:text-cream transition-colors">Web Development</a>
+                    </li>
+                    <li><a href="branding.html" class="hover:text-cream transition-colors">Brand Design</a></li>
+                    <li><a href="audit.html" class="hover:text-cream transition-colors text-cream font-semibold">Free
+                            Audit Tool</a></li>
+                    <li><a href="portfolio.html" class="hover:text-cream transition-colors">Portfolio</a></li>
+                    <li><a href="about.html" class="hover:text-cream transition-colors">About Studio</a></li>
+                </ul>
+            </div>
+
+            <!-- Connect Info -->
+            <div>
+                <h4 class="text-[11px] font-mono uppercase tracking-widest text-cream/40 mb-3 font-bold">CONNECT</h4>
+                <ul class="space-y-2 text-cream/70 font-sans">
+                    <li><button data-open-modal class="hover:text-cream transition-colors text-left">Start Project
+                            Brief</button>
+                    </li>
+                    <li><a href="mailto:hello@byjanno.com"
+                            class="hover:text-cream transition-colors font-mono text-[11px]">hello@byjanno.com</a></li>
+                    <li class="pt-1"><span class="text-emerald-400 font-mono text-[11px]">● Available for Q3/Q4</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright Bar -->
+        <div
+            class="pt-6 flex flex-col sm:flex-row items-center justify-between text-cream/30 text-[11px] font-mono gap-2 border-t border-cream/5">
+            <p>&copy; 2026 By Janno. All rights reserved.</p>
+            <p>Designed &amp; Engineered in South Africa</p>
+        </div>
+    </footer>
+
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <!-- Studio Master Animations & Audit Script -->
+    <script src="js/animations.js"></script>
+    <script src="js/audit.js"></script>
+</body>
+
+</html>

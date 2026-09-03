@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Layout Sandbox — By Janno.</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Special+Elite&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0E161B',
+                        darkcard: '#16222A',
+                        cream: '#FFFDD0',
+                        accent: {
+                            DEFAULT: '#AA4628',
+                            hover: '#923A1F'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                        brand: ['Special Elite', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Atropos 3D Parallax CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/atropos@2/atropos.css" />
+
+    <style>
+        .btn-depth {
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-depth:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(170, 70, 40, 0.25), 0 6px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .btn-depth:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body class="bg-darkbg text-cream font-sans min-h-screen antialiased selection:bg-accent selection:text-cream">
+
+    <!-- Header -->
+    <header class="w-full max-w-5xl mx-auto px-6 py-6 border-b border-cream/10 flex justify-between items-center">
+        <span class="font-brand text-2xl text-cream">By Janno<span class="text-accent">.</span></span>
+        <span class="font-mono text-xs uppercase tracking-widest text-cream/40">UI Interaction Prototype Sandbox</span>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-24">
+
+        <!-- SECTION 1: 3D Parallax Tilt Card -->
+        <section>
+            <div class="mb-6">
+                <span
+                    class="inline-block px-3 py-1 bg-accent/10 border border-accent/30 rounded-full text-accent text-[10px] font-mono tracking-widest uppercase mb-2">
+                    Demo 1
+                </span>
+                <h2 class="text-2xl font-bold font-sans text-cream">3D Parallax Hover Surface</h2>
+                <p class="text-cream/60 text-xs mt-1">Move your mouse over the image surface to inspect 3D multi-layer
+                    depth response.</p>
+            </div>
+
+            <div class="p-6 bg-darkcard border border-cream/10 rounded-2xl shadow-2xl">
+                <!-- Controls Header -->
+                <div class="mb-6 flex justify-between items-center">
+                    <div>
+                        <span class="block text-xs font-mono uppercase tracking-widest text-cream/50 font-bold">Image
+                            Switcher</span>
+                        <p class="text-[11px] text-cream/40 font-mono">Test image swapping in place</p>
+                    </div>
+                    <button id="swap-3d-image-btn"
+                        class="btn-depth bg-accent hover:bg-accent-hover text-cream font-mono text-xs uppercase font-bold px-5 py-2.5 rounded-lg">
+                        Swap Sample Image
+                    </button>
+                </div>
+
+                <!-- Atropos Interactive 3D Card -->
+                <div
+                    class="atropos my-atropos relative w-full h-80 rounded-xl overflow-hidden cursor-pointer border border-cream/10">
+                    <div class="atropos-scale">
+                        <div class="atropos-rotate">
+                            <div class="atropos-inner bg-darkbg flex items-center justify-center relative">
+
+                                <!-- Background Image Layer -->
+                                <img id="interactive-3d-image" src="images/Shawarma-4.jpg" alt="3D Parallax Sample"
+                                    data-atropos-offset="-5"
+                                    class="w-full h-80 object-cover rounded-xl transition-opacity duration-300" />
+
+                                <!-- Floating Foreground HUD Layer -->
+                                <div data-atropos-offset="5"
+                                    class="absolute inset-0 p-6 flex flex-col justify-between pointer-events-none">
+                                    <span
+                                        class="inline-block px-3 py-1 bg-darkbg/80 border border-accent/40 rounded-full text-accent text-[10px] font-mono tracking-widest uppercase self-start backdrop-blur-md">
+                                        Interactive 3D Layer
+                                    </span>
+                                    <div
+                                        class="bg-darkbg/90 border border-cream/10 p-4 rounded-lg backdrop-blur-md max-w-xs">
+                                        <h4 class="text-xs font-bold text-cream font-mono">Atropos 3D Tilt Engaged</h4>
+                                        <p class="text-[10px] text-cream/60 font-sans mt-1">Cursor displacement directly
+                                            controls parallax perspective offset.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Scroll-Driven Video Scrubbing -->
+        <section class="pb-24">
+            <div class="mb-6">
+                <span
+                    class="inline-block px-3 py-1 bg-accent/10 border border-accent/30 rounded-full text-accent text-[10px] font-mono tracking-widest uppercase mb-2">
+                    Demo 2
+                </span>
+                <h2 class="text-2xl font-bold font-sans text-cream">Shawarma Assembly Scroll Transition</h2>
+                <p class="text-cream/60 text-xs mt-1">Scroll down through the track to watch the shawarma wrap
+                    frame-by-frame from Stage 4 to Stage 1.</p>
+            </div>
+
+            <!-- Scroll Track Container -->
+            <div id="scroll-track" class="relative h-[300vh] w-full border-l-2 border-dashed border-cream/10 pl-2">
+
+                <!-- Sticky Viewport Wrapper -->
+                <div
+                    class="sticky top-20 h-[65vh] w-full rounded-2xl overflow-hidden border border-cream/10 bg-darkbg shadow-2xl flex items-center justify-center cursor-pointer group">
+
+                    <!-- Stacked Video Frames Container -->
+                    <div id="frame-stack" class="relative w-full h-full inset-0 bg-white/5">
+                        <!-- Frame 1 (Shawarma 4) -->
+                        <img src="images/Shawarma-4.jpg" alt="Shawarma Stage 4"
+                            class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-300 opacity-100"
+                            data-frame="0" />
+                        <!-- Frame 2 (Shawarma 3) -->
+                        <img src="images/Shawarma-3.jpg" alt="Shawarma Stage 3"
+                            class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-300 opacity-0"
+                            data-frame="1" />
+                        <!-- Frame 3 (Shawarma 2) -->
+                        <img src="images/Shawarma-2.jpg" alt="Shawarma Stage 2"
+                            class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-300 opacity-0"
+                            data-frame="2" />
+                        <!-- Frame 4 (Shawarma 1) -->
+                        <img src="images/Shawarma-1.jpg" alt="Shawarma Stage 1"
+                            class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-300 opacity-0"
+                            data-frame="3" />
+                    </div>
+
+                    <!-- Click Ripple Visual Layer -->
+                    <div id="click-overlay" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+
+                    <!-- Live Overlay HUD -->
+                    <div
+                        class="absolute bottom-4 left-4 right-4 p-4 bg-darkbg/90 backdrop-blur-md border border-cream/10 rounded-xl flex items-center justify-between pointer-events-none">
+                        <div>
+                            <span id="stage-indicator"
+                                class="text-[10px] font-mono text-accent uppercase tracking-widest block font-bold">Stage
+                                1 of 4</span>
+                            <p class="text-[11px] font-mono text-cream/70 mt-0.5">Scroll down to scrub sequence • Click
+                                card to trigger pulse ring</p>
+                        </div>
+                        <!-- Progress Bar -->
+                        <div class="w-24 bg-cream/10 h-1.5 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="bg-accent h-full w-0 transition-all duration-75"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Atropos JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/atropos@2/atropos.min.js"></script>
+
+    <script>
+        // ==========================================
+        // 1. ATROPOS 3D PARALLAX INITIALIZATION
+        // ==========================================
+        const myAtropos = Atropos({
+            el: '.my-atropos',
+            activeOffset: 40,
+            shadowScale: 1.05,
+            highlight: true,
+        });
+
+        const sampleImages = [
+            "images/Shawarma-4.jpg",
+            "images/Shawarma-3.jpg",
+            "images/Shawarma-2.jpg",
+            "images/Shawarma-1.jpg"
+        ];
+        let imageIndex = 0;
+
+        document.getElementById('swap-3d-image-btn')?.addEventListener('click', () => {
+            const img = document.getElementById('interactive-3d-image');
+            if (!img) return;
+            imageIndex = (imageIndex + 1) % sampleImages.length;
+            img.src = sampleImages[imageIndex];
+        });
+
+        // ==========================================
+        // 2. ULTRA-SMOOTH LERP & CONTINUOUS CROSS-FADE
+        // ==========================================
+        const totalFrames = 4;
+        let targetProgress = 0;
+        let currentProgress = 0;
+
+        // Custom stage callouts for the Shawarma wrap sequence
+        const stageDetails = [
+            { stage: "Stage 1 of 4", title: "Assembly Prep", desc: "Open flatbread base & garlic spread" },
+            { stage: "Stage 2 of 4", title: "Layered Fillings", desc: "Flame-grilled cuts, pickles & veggies" },
+            { stage: "Stage 3 of 4", title: "Folding Phase", desc: "Tucking the edges & saucing" },
+            { stage: "Stage 4 of 4", title: "Rolled & Ready", desc: "Tightly wrapped signature shawarma" }
+        ];
+
+        // Capture scroll position
+        window.addEventListener('scroll', () => {
+            const track = document.getElementById('scroll-track');
+            if (!track) return;
+
+            const rect = track.getBoundingClientRect();
+            const totalScroll = track.offsetHeight - window.innerHeight;
+
+            if (totalScroll > 0) {
+                const rawProgress = -rect.top / totalScroll;
+                targetProgress = Math.min(Math.max(rawProgress, 0), 1);
+            }
+        });
+
+        // 60FPS Render Loop with Physics Inertia (Lerp)
+        function renderScrollAnimation() {
+            // 0.08 friction factor glides current position toward target scroll position
+            currentProgress += (targetProgress - currentProgress) * 0.08;
+
+            // Update Progress Bar
+            const progressBar = document.getElementById('progress-bar');
+            if (progressBar) {
+                progressBar.style.width = `${(currentProgress * 100).toFixed(2)}%`;
+            }
+
+            // Map progress (0.0 to 1.0) continuously across frames (0 to 3)
+            const scaledProgress = currentProgress * (totalFrames - 1);
+            const images = document.querySelectorAll('#frame-stack img');
+
+            images.forEach((img, idx) => {
+                // Calculate distance from exact frame index for seamless cross-fading
+                const distance = Math.abs(scaledProgress - idx);
+                const opacity = Math.max(0, 1 - distance);
+
+                img.style.opacity = opacity.toFixed(3);
+
+                // Subtle scaling pulse per frame
+                if (opacity > 0) {
+                    const scale = 1 + (1 - distance) * 0.04;
+                    img.style.transform = `scale(${scale})`;
+                }
+            });
+
+            // Update HUD Text & Stage Callouts
+            const activeIndex = Math.min(Math.floor(currentProgress * totalFrames), totalFrames - 1);
+            const info = stageDetails[activeIndex];
+
+            const stageText = document.getElementById('stage-indicator');
+            if (stageText && info) {
+                stageText.innerHTML = `<span class="text-accent font-bold">${info.stage}: ${info.title}</span> — <span class="text-cream/70">${info.desc}</span>`;
+            }
+
+            requestAnimationFrame(renderScrollAnimation);
+        }
+
+        // Start continuous loop
+        requestAnimationFrame(renderScrollAnimation);
+
+        // ==========================================
+        // 3. CLICK RIPPLE ANIMATION LOGIC
+        // ==========================================
+        document.getElementById('frame-stack')?.addEventListener('click', (e) => {
+            const overlay = document.getElementById('click-overlay');
+            if (!overlay) return;
+
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const ripple = document.createElement('div');
+            ripple.className = 'absolute w-12 h-12 bg-accent/50 border-2 border-accent rounded-full animate-ping pointer-events-none transform -translate-x-1/2 -translate-y-1/2';
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+
+            overlay.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 800);
+        });
+    </script>
+</body>
+
+</html>
