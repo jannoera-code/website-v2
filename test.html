@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tally.so; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://tally.so;">
     <title>Interactive Layout Sandbox — By Janno.</title>
 
     <!-- Google Fonts -->
@@ -56,7 +57,12 @@
             transform: translateY(1px) scale(0.98);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
         }
-    </style>
+
+    img, svg, video {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 
 <body class="bg-darkbg text-cream font-sans min-h-screen antialiased selection:bg-accent selection:text-cream">
@@ -103,7 +109,7 @@
                             <div class="atropos-inner bg-darkbg flex items-center justify-center relative">
 
                                 <!-- Background Image Layer -->
-                                <img id="interactive-3d-image" src="images/Shawarma-4.jpg" alt="3D Parallax Sample"
+                                <img id="interactive-3d-image" src="Shawarma-4.jpg" alt="3D Parallax Sample"
                                     data-atropos-offset="-5"
                                     class="w-full h-80 object-cover rounded-xl transition-opacity duration-300" />
 
@@ -151,19 +157,19 @@
                     <!-- Stacked Video Frames Container -->
                     <div id="frame-stack" class="relative w-full h-full inset-0 bg-white/5">
                         <!-- Frame 1 (Shawarma 4) -->
-                        <img src="images/Shawarma-4.jpg" alt="Shawarma Stage 4"
+                        <img src="Shawarma-4.jpg" alt="Shawarma Stage 4"
                             class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-300 opacity-100"
                             data-frame="0" />
                         <!-- Frame 2 (Shawarma 3) -->
-                        <img src="images/Shawarma-3.jpg" alt="Shawarma Stage 3"
+                        <img src="Shawarma-3.jpg" alt="Shawarma Stage 3"
                             class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-300 opacity-0"
                             data-frame="1" />
                         <!-- Frame 3 (Shawarma 2) -->
-                        <img src="images/Shawarma-2.jpg" alt="Shawarma Stage 2"
+                        <img src="Shawarma-2.jpg" alt="Shawarma Stage 2"
                             class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-300 opacity-0"
                             data-frame="2" />
                         <!-- Frame 4 (Shawarma 1) -->
-                        <img src="images/Shawarma-1.jpg" alt="Shawarma Stage 1"
+                        <img src="Shawarma-1.jpg" alt="Shawarma Stage 1"
                             class="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-300 opacity-0"
                             data-frame="3" />
                     </div>
@@ -208,10 +214,10 @@
         });
 
         const sampleImages = [
-            "images/Shawarma-4.jpg",
-            "images/Shawarma-3.jpg",
-            "images/Shawarma-2.jpg",
-            "images/Shawarma-1.jpg"
+            "Shawarma-4.jpg",
+            "Shawarma-3.jpg",
+            "Shawarma-2.jpg",
+            "Shawarma-1.jpg"
         ];
         let imageIndex = 0;
 

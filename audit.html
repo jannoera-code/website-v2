@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://tally.so; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://tally.so;">
     <title>Website Audit & UX Analyzer — By Janno.</title>
 
     <!-- Google Fonts: Special Elite, Plus Jakarta Sans, Space Mono -->
@@ -72,7 +73,12 @@
         .animate-spin-custom {
             animation: spin 1s linear infinite;
         }
-    </style>
+
+    img, svg, video {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 
 <body
@@ -102,6 +108,8 @@
 
     <!-- Audit Section Main Container -->
     <main class="w-full max-w-4xl mx-auto px-6 py-12 flex-grow flex items-center justify-center bg-radial-glow">
+    <section class="w-full flex flex-col items-center justify-center">
+
         <div class="w-full">
 
             <!-- 1. Initial URL Input Form -->
@@ -119,7 +127,7 @@
                 </p>
 
                 <form id="audit-url-form" class="flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="audit-url-input" placeholder="yourwebsite.co.za" required
+                    <input type="text" id="audit-url-input" placeholder="yourwebsite.co.za" required maxlength="253" autocomplete="url"
                         class="flex-1 bg-darkbg border border-cream/20 rounded-lg px-4 py-3.5 text-cream placeholder-cream/30 text-sm font-mono focus:outline-none focus:border-accent transition-colors" />
                     <button type="submit" id="audit-submit-btn"
                         class="btn-depth bg-accent hover:bg-accent-hover text-cream font-mono text-xs uppercase tracking-wider font-bold px-7 py-3.5 rounded-lg whitespace-nowrap">
@@ -208,7 +216,7 @@
                     </p>
 
                     <form id="audit-unlock-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                        <input type="email" id="audit-email-input" placeholder="you@domain.co.za" required
+                        <input type="email" id="audit-email-input" placeholder="you@domain.co.za" required maxlength="254" autocomplete="email"
                             class="flex-1 bg-darkbg border border-cream/20 rounded-lg px-4 py-3 text-cream placeholder-cream/30 text-xs font-mono focus:outline-none focus:border-accent" />
                         <button type="submit"
                             class="btn-depth bg-accent hover:bg-accent-hover text-cream font-mono text-xs uppercase tracking-wider font-bold px-6 py-3 rounded-lg whitespace-nowrap">
@@ -231,7 +239,9 @@
             </div>
 
         </div>
-    </main>
+
+    </section>
+</main>
 
     <!-- Global Footer -->
     <footer class="w-full max-w-5xl mx-auto px-6 pt-12 pb-8 bg-transparent text-cream/70 text-xs font-sans">
